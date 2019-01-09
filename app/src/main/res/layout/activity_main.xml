@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/add_calendar"
+        android:id="@+id/button_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -16,12 +16,12 @@
         android:text="캘린더 받아오기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.663"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_field" />
 
     <Button
-        android:id="@+id/add_calendar2"
+        android:id="@+id/button_oath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -29,7 +29,7 @@
         android:text="구글 인증"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintHorizontal_bias="0.204"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_field"
         app:layout_constraintVertical_bias="1.0" />
@@ -43,7 +43,7 @@
         android:layout_marginEnd="41dp"
         android:layout_marginBottom="39dp"
         android:text="text"
-        app:layout_constraintBottom_toTopOf="@+id/add_calendar"
+        app:layout_constraintBottom_toTopOf="@+id/button_calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

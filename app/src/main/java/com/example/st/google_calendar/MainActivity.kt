@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.google.android.gms.common.GoogleApiAvailability
@@ -42,6 +41,8 @@ class MainActivity : AppCompatActivity() {
 
     private val REQUEST_ACCOUNT: String = "accountName"
     private var calendarId: String = "skaehdwn1014@gmail.com"
+    private var test: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +56,16 @@ class MainActivity : AppCompatActivity() {
         initCalendarDataService()
         googleCalendarRepository = CalendarRepository(calendarDataService)
 
-        add_calendar.setOnClickListener{
+
+        button_oath.setOnClickListener{
+            isGooglePlayServiceAvailable()
         }
-        add_calendar2.setOnClickListener{
-            getEventList2(calendarId)
+
+        button_calendar.setOnClickListener{
+            if(test)
+             CalendarList()
         }
+
     }
 
     fun initCalendarDataService() {
@@ -70,7 +76,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun CalendarList() {
-        if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getCalendarList()
                     .observeOn(AndroidSchedulers.mainThread())
                     .map { it.items }
@@ -78,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                         it.forEach { item ->
                             val button = Button(this)
                             text_field.text = item.summary
-                            add_calendar.setOnClickListener{
+                            button_calendar.setOnClickListener{
                                 getEventList(item.id)
                             }
                         }
@@ -88,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                             else -> it.printStackTrace()
                         }
                     }).apply { compositeDisposable.add(this) }
-        }
+
     }
 
     private fun getEventList(calendarId: String){
@@ -111,15 +116,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getEventList2(calendarId: String){
-        if(isGooglePlayServiceAvailable()){
-            googleCalendarRepository.getEventList(calendarId)
-        }
-    }
 
     private fun isGooglePlayServiceAvailable(): Boolean {
-        var test: Boolean = true
-
         googleAccountCredential.selectedAccountName?.let {
             return true
         }.let {
