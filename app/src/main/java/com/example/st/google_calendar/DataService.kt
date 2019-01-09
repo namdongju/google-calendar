@@ -12,9 +12,9 @@ import io.reactivex.schedulers.Schedulers
 
 
 class DataService constructor(
-        httptransport : HttpTransport,
+        httptransport: HttpTransport,
         jacksonFactory: JacksonFactory,
-        googleAccountCredential : GoogleAccountCredential
+        googleAccountCredential: GoogleAccountCredential
 ) : Service {
     private val calendar: Calendar = Calendar.Builder(httptransport, jacksonFactory, googleAccountCredential)
             .setApplicationName("Google Calendar API ,MVC").build()

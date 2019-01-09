@@ -68,17 +68,17 @@ class MainActivity : AppCompatActivity() {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getCalendarList()
                     .observeOn(AndroidSchedulers.mainThread())
-                    .map { it.items }
+                    .map {it.items}
                     .subscribe({
-                        it.forEach { item ->
+                        it.forEach{item->
                             Button(this)
                             text_field.text = item.summary
                             add_calendar.setOnClickListener {
                                 getEventList(item.id)
                             }
                         }
-                    }, { it.printStackTrace() })
-                    .apply { compositeDisposable.add(this) }
+                    }, { it.printStackTrace()})
+                    .apply { compositeDisposable.add(this)}
         }
     }
 
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
                 googleAccountCredential.selectedAccountName = accountName
                 CalendarList()
             }.let {
-                startActivityForResult(googleAccountCredential.newChooseAccountIntent(), RC_ACCOUNT_PICKER);
+                startActivityForResult(googleAccountCredential.newChooseAccountIntent(), RC_ACCOUNT_PICKER)
             }
 
         } else {

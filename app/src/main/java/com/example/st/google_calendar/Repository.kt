@@ -6,10 +6,11 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 
-class Repository @Inject constructor (private val remote : DataService ) : Service{
+class Repository @Inject constructor(private val remote: DataService) : Service {
     override fun getCalendarList(): Single<CalendarList> {
         return remote.getCalendarList()
     }
+
     override fun getEventList(calendarId: String): Single<List<Event>> {
         return remote.getEventList(calendarId)
     }
