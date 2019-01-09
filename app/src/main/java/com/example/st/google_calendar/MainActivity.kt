@@ -57,13 +57,11 @@ class MainActivity : AppCompatActivity() {
             getEventList2(calendarId)
         }
     }
-
     fun initCalendarDataService() {
         val httptransport: HttpTransport = AndroidHttp.newCompatibleTransport()
         val jsonFactory: JacksonFactory = JacksonFactory.getDefaultInstance()
         calendarDataService = DataService(httptransport, jsonFactory, googleAccountCredential)
     }
-
     private fun CalendarList() {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getCalendarList()
@@ -81,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                     .apply { compositeDisposable.add(this)}
         }
     }
-
     private fun getEventList(calendarId: String) {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getEventList(calendarId)
@@ -96,7 +93,6 @@ class MainActivity : AppCompatActivity() {
                     }
         }
     }
-
     private fun getEventList2(calendarId: String) {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getEventList(calendarId)
@@ -111,7 +107,6 @@ class MainActivity : AppCompatActivity() {
                     }
         }
     }
-
     private fun isGooglePlayServiceAvailable(): Boolean {
         googleAccountCredential.selectedAccountName?.let {
             return true
@@ -120,7 +115,6 @@ class MainActivity : AppCompatActivity() {
             return false
         }
     }
-
     private fun getResultFromApi() {
         if (!isGooglePlayServiceAvailable())
         else {
@@ -130,7 +124,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     @AfterPermissionGranted(RP_GET_ACCOUNTS)
     private fun chooseAccount() {
         if (hasPermissions(this, Manifest.permission.GET_ACCOUNTS)) {
@@ -152,7 +145,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val accountName = AccountManager.KEY_ACCOUNT_NAME
         when (requestCode) {
