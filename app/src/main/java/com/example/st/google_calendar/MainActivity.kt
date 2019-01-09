@@ -29,6 +29,7 @@ private const val RC_ACCOUNT_PICKER = 1003
 private const val REQUEST_AUTHORIZATION = 1004
 private const val RC_AUTH_PERMISSION = 1005
 
+@Suppress("NAME_SHADOWING")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var googleAccountCredential: GoogleAccountCredential
@@ -164,7 +165,7 @@ class MainActivity : AppCompatActivity() {
             RC_ACCOUNT_PICKER -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val accountName: String = data!!.getStringExtra(accountName)
-                    accountName?.let {
+                    accountName.let {
 
                         val setting = getPreferences(Context.MODE_PRIVATE)
                         setting.edit().putString(REQUEST_ACCOUNT, accountName).apply {
@@ -184,7 +185,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "구글 인증이 필요합니다.", Toast.LENGTH_SHORT).show()
                 getResultFromApi()
             }
-
         }
     }
 }
