@@ -11,13 +11,13 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 
-class CalendarDataService constructor(
+class DataService constructor(
         httptransport : HttpTransport,
         jacksonFactory: JacksonFactory,
         googleAccountCredential : GoogleAccountCredential
-) : CalendarService {
+) : Service {
     private val calendar: Calendar = Calendar.Builder(httptransport, jacksonFactory, googleAccountCredential)
-            .setApplicationName("Google Calendar ").build()
+            .setApplicationName("Google Calendar API ,MVC").build()
 
     override fun getCalendarList(): Single<CalendarList> {
         return Single.fromCallable { calendar.CalendarList().list().execute() }
@@ -33,10 +33,9 @@ class CalendarDataService constructor(
                     .setOrderBy("startTime")
                     .setTimeMin(now)
                     .setSingleEvents(true)
-                    .execute() }
+                    .execute()
+        }
                 .subscribeOn(Schedulers.io())
                 .map { it.items }
     }
 }
-
-
