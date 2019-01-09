@@ -10,43 +10,37 @@
         android:id="@+id/add_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="56dp"
         android:text="대한민국 공휴일"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/add_calendar2"
+        app:layout_constraintTop_toBottomOf="@+id/text_field"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/add_calendar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="56dp"
         android:text="개인 일정"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintEnd_toStartOf="@+id/add_calendar"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_field"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/text_field"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="39dp"
+        android:layout_width="352dp"
+        android:layout_height="428dp"
         android:text="text"
         app:layout_constraintBottom_toTopOf="@+id/add_calendar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19"
-        app:layout_constraintVertical_chainStyle="spread" />
+        tools:ignore="MissingConstraints" />
+
 
 </android.support.constraint.ConstraintLayout>
