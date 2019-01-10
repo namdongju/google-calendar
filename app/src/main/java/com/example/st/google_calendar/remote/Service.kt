@@ -1,4 +1,4 @@
-package com.example.st.google_calendar
+package com.example.st.google_calendar.remote
 
 import com.google.api.services.calendar.model.CalendarList
 import com.google.api.services.calendar.model.Event

@@ -1,4 +1,4 @@
-package com.example.st.google_calendar
+package com.example.st.google_calendar.remote
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.http.HttpTransport

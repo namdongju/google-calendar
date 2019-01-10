@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.Toast
+import com.example.st.google_calendar.remote.DataService
+import com.example.st.google_calendar.remote.Repository
 import com.google.api.client.extensions.android.http.AndroidHttp
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.http.HttpTransport
