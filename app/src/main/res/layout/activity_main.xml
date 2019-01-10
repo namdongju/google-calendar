@@ -6,41 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/add_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="대한민국 공휴일"
+    <TextView
+        android:id="@+id/text_field"
+        android:layout_width="289dp"
+        android:layout_height="361dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="41dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/add_calendar2"
-        app:layout_constraintTop_toBottomOf="@+id/text_field"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_auth"
+        android:layout_width="124dp"
+        android:layout_height="47dp"
+        android:text="본인 인증"
+        app:layout_constraintBottom_toTopOf="@+id/text_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_calendar"
+        android:layout_width="124dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="40dp"
+        android:text="대한민국의 휴일"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/text_field"
+        app:layout_constraintEnd_toStartOf="@+id/add_calendar2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/add_calendar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="124dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="40dp"
         android:text="개인 일정"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_calendar"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/text_field"
-        android:layout_width="352dp"
-        android:layout_height="428dp"
-        android:text="text"
-        app:layout_constraintBottom_toTopOf="@+id/add_calendar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/text_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintStart_toEndOf="@+id/add_calendar" />
 
 </android.support.constraint.ConstraintLayout>

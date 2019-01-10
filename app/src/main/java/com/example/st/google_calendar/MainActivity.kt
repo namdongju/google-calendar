@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.example.st.google_calendar.remote.DataService
@@ -53,34 +54,55 @@ class MainActivity : AppCompatActivity() {
         initCalendarDataService()
         googleCalendarRepository = Repository(calendarDataService)
 
+        button_auth.setOnClickListener {
+            getEventList(calendarId)
+        }
         add_calendar.setOnClickListener {
         }
         add_calendar2.setOnClickListener {
-            getEventList2(calendarId)
+            getEventList(calendarId)
         }
     }
+
     fun initCalendarDataService() {
         val httptransport: HttpTransport = AndroidHttp.newCompatibleTransport()
         val jsonFactory: JacksonFactory = JacksonFactory.getDefaultInstance()
         calendarDataService = DataService(httptransport, jsonFactory, googleAccountCredential)
     }
+
     private fun CalendarList() {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getCalendarList()
                     .observeOn(AndroidSchedulers.mainThread())
-                    .map {it.items}
+                    .map { it.items }
                     .subscribe({
-                        it.forEach{item->
+                        it.forEach { item ->
                             Button(this)
                             text_field.text = item.summary
                             add_calendar.setOnClickListener {
                                 getEventList(item.id)
                             }
                         }
-                    }, { it.printStackTrace()})
-                    .apply { compositeDisposable.add(this)}
+                    }, { it.printStackTrace() })
+                    .apply { compositeDisposable.add(this) }
         }
     }
+
+    private fun getEventList3(calendarId: String) {
+        if (isGooglePlayServiceAvailable()) {
+            googleCalendarRepository.getEventList(calendarId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        text_field.text = it.fold("") { acc, event ->
+                            acc + "날짜=${event.start.date}" + " " + " 제목=${event.summary}\n"
+                        }
+                    }, { it.printStackTrace() })
+                    .apply {
+                        compositeDisposable.add(this)
+                    }
+        }
+    }
+
     private fun getEventList(calendarId: String) {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getEventList(calendarId)
@@ -95,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                     }
         }
     }
+
     private fun getEventList2(calendarId: String) {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getEventList(calendarId)
@@ -109,14 +132,19 @@ class MainActivity : AppCompatActivity() {
                     }
         }
     }
+
     private fun isGooglePlayServiceAvailable(): Boolean {
         googleAccountCredential.selectedAccountName?.let {
+            button_auth.visibility = View.INVISIBLE
+            add_calendar.visibility = View.VISIBLE
+            add_calendar2.visibility = View.VISIBLE
             return true
         }.let {
             chooseAccount()
             return false
         }
     }
+
     private fun getResultFromApi() {
         if (!isGooglePlayServiceAvailable())
         else {
@@ -126,6 +154,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     @AfterPermissionGranted(RP_GET_ACCOUNTS)
     private fun chooseAccount() {
         if (hasPermissions(this, Manifest.permission.GET_ACCOUNTS)) {
@@ -147,6 +176,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val accountName = AccountManager.KEY_ACCOUNT_NAME
         when (requestCode) {
