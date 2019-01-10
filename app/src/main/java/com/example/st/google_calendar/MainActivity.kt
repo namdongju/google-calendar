@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var calendarDataService: DataService
     private val REQUEST_ACCOUNT: String = "accountName"
     private var calendarId: String = "skaehdwn1014@gmail.com"
+    private var test: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,8 +71,9 @@ class MainActivity : AppCompatActivity() {
         calendarDataService = DataService(httptransport, jsonFactory, googleAccountCredential)
     }
 
+
+
     private fun CalendarList() {
-        if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getCalendarList()
                     .observeOn(AndroidSchedulers.mainThread())
                     .map { it.items }
@@ -86,39 +88,8 @@ class MainActivity : AppCompatActivity() {
                     }, { it.printStackTrace() })
                     .apply { compositeDisposable.add(this) }
         }
-    }
-
-    private fun getEventList3(calendarId: String) {
-        if (isGooglePlayServiceAvailable()) {
-            googleCalendarRepository.getEventList(calendarId)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        text_field.text = it.fold("") { acc, event ->
-                            acc + "날짜=${event.start.date}" + " " + " 제목=${event.summary}\n"
-                        }
-                    }, { it.printStackTrace() })
-                    .apply {
-                        compositeDisposable.add(this)
-                    }
-        }
-    }
 
     private fun getEventList(calendarId: String) {
-        if (isGooglePlayServiceAvailable()) {
-            googleCalendarRepository.getEventList(calendarId)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        text_field.text = it.fold("") { acc, event ->
-                            acc + "날짜=${event.start.date}" + " " + " 제목=${event.summary}\n"
-                        }
-                    }, { it.printStackTrace() })
-                    .apply {
-                        compositeDisposable.add(this)
-                    }
-        }
-    }
-
-    private fun getEventList2(calendarId: String) {
         if (isGooglePlayServiceAvailable()) {
             googleCalendarRepository.getEventList(calendarId)
                     .observeOn(AndroidSchedulers.mainThread())
