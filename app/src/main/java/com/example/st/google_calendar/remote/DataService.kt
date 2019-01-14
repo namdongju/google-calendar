@@ -9,9 +9,10 @@ import com.google.api.services.calendar.model.CalendarList
 import com.google.api.services.calendar.model.Event
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
-class DataService constructor(
+class DataService @Inject constructor(
         httptransport: HttpTransport,
         jacksonFactory: JacksonFactory,
         googleAccountCredential: GoogleAccountCredential
@@ -25,7 +26,6 @@ class DataService constructor(
     }
 
     override fun getEventList(calendarId: String): Single<List<Event>> {
-
         var now = DateTime(System.currentTimeMillis())
         return Single.fromCallable {
             calendar.events()

@@ -6,7 +6,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -18,6 +17,7 @@ import com.google.api.client.http.HttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.client.util.ExponentialBackOff
 import com.google.api.services.calendar.CalendarScopes
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,6 +25,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.EasyPermissions.hasPermissions
 import java.util.*
+import javax.inject.Inject
 
 private const val RP_GET_ACCOUNTS = 1001
 private const val REQUEST_CODE_PLAY_SERVICE = 1002
@@ -33,36 +34,38 @@ private const val REQUEST_AUTHORIZATION = 1004
 private const val RC_AUTH_PERMISSION = 1005
 
 @Suppress("NAME_SHADOWING")
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
-    private lateinit var googleAccountCredential: GoogleAccountCredential
-    private lateinit var compositeDisposable: CompositeDisposable
-    private lateinit var googleCalendarRepository: Repository
-    private lateinit var calendarDataService: DataService
+    @Inject
+    lateinit var googleAccountCredential: GoogleAccountCredential
+    @Inject
+    lateinit var compositeDisposable: CompositeDisposable
+    @Inject
+    lateinit var googleCalendarRepository: Repository
+    @Inject
+    lateinit var calendarDataService: DataService
+
     private val REQUEST_ACCOUNT: String = "accountName"
     private var calendarId: String = "skaehdwn1014@gmail.com"
-    private var test: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         compositeDisposable = CompositeDisposable()
         googleAccountCredential = GoogleAccountCredential.usingOAuth2(
                 applicationContext, Arrays.asList(CalendarScopes.CALENDAR)
         ).setBackOff(ExponentialBackOff())
-
         initCalendarDataService()
         googleCalendarRepository = Repository(calendarDataService)
-
         button_auth.setOnClickListener {
             getEventList(calendarId)
         }
-        add_calendar.setOnClickListener {
-        }
-        add_calendar2.setOnClickListener {
+        button_calendar2.setOnClickListener {
             getEventList(calendarId)
         }
+        button_calendar.setOnClickListener {
+        }
+
     }
 
     fun initCalendarDataService() {
@@ -71,23 +74,21 @@ class MainActivity : AppCompatActivity() {
         calendarDataService = DataService(httptransport, jsonFactory, googleAccountCredential)
     }
 
-
-
     private fun CalendarList() {
-            googleCalendarRepository.getCalendarList()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .map { it.items }
-                    .subscribe({
-                        it.forEach { item ->
-                            Button(this)
-                            text_field.text = item.summary
-                            add_calendar.setOnClickListener {
-                                getEventList(item.id)
-                            }
+        googleCalendarRepository.getCalendarList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { it.items }
+                .subscribe({
+                    it.forEach { item ->
+                        Button(this)
+                        text_field.text = item.summary
+                        button_calendar.setOnClickListener {
+                            getEventList(item.id)
                         }
-                    }, { it.printStackTrace() })
-                    .apply { compositeDisposable.add(this) }
-        }
+                    }
+                }, { it.printStackTrace() })
+                .apply { compositeDisposable.add(this) }
+    }
 
     private fun getEventList(calendarId: String) {
         if (isGooglePlayServiceAvailable()) {
@@ -107,8 +108,8 @@ class MainActivity : AppCompatActivity() {
     private fun isGooglePlayServiceAvailable(): Boolean {
         googleAccountCredential.selectedAccountName?.let {
             button_auth.visibility = View.INVISIBLE
-            add_calendar.visibility = View.VISIBLE
-            add_calendar2.visibility = View.VISIBLE
+            button_calendar.visibility = View.VISIBLE
+            button_calendar2.visibility = View.VISIBLE
             return true
         }.let {
             chooseAccount()
@@ -129,12 +130,11 @@ class MainActivity : AppCompatActivity() {
     @AfterPermissionGranted(RP_GET_ACCOUNTS)
     private fun chooseAccount() {
         if (hasPermissions(this, Manifest.permission.GET_ACCOUNTS)) {
-
             val accountName: String? = getPreferences(Context.MODE_PRIVATE).getString(REQUEST_ACCOUNT, null)
             accountName?.let {
                 googleAccountCredential.selectedAccountName = accountName
                 CalendarList()
-            }.let {
+            }.let{
                 startActivityForResult(googleAccountCredential.newChooseAccountIntent(), RC_ACCOUNT_PICKER)
             }
 
@@ -154,8 +154,8 @@ class MainActivity : AppCompatActivity() {
             REQUEST_CODE_PLAY_SERVICE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     text_field.text = "구글 플레이 서비스를 설치 해주세요."
-                } else
-                    getResultFromApi()
+                }
+                getResultFromApi()
             }
             RC_ACCOUNT_PICKER -> {
                 if (resultCode == Activity.RESULT_OK) {

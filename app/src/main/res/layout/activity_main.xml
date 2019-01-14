@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <TextView
         android:id="@+id/text_field"
         android:layout_width="288dp"
@@ -32,19 +34,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add_calendar"
+        android:id="@+id/button_calendar"
         android:layout_width="124dp"
         android:layout_height="47dp"
         android:layout_marginBottom="40dp"
         android:text="대한민국의 휴일"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/text_field"
-        app:layout_constraintEnd_toStartOf="@+id/add_calendar2"
+        app:layout_constraintEnd_toStartOf="@+id/button_calendar2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/add_calendar2"
+        android:id="@+id/button_calendar2"
         android:layout_width="124dp"
         android:layout_height="47dp"
         android:layout_marginBottom="40dp"
@@ -53,6 +55,6 @@
         app:layout_constraintBottom_toTopOf="@+id/text_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/add_calendar" />
+        app:layout_constraintStart_toEndOf="@+id/button_calendar" />
 
 </android.support.constraint.ConstraintLayout>
