@@ -1,4 +1,4 @@
-package com.example.onemask.myapplication.application.di
+package com.example.st.google_calendar.application.di
 
 import android.app.Application
 import android.content.Context
