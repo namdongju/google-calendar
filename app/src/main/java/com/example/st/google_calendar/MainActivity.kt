@@ -39,12 +39,9 @@ class MainActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var googleAccountCredential: GoogleAccountCredential
     @Inject
-    lateinit var compositeDisposable: CompositeDisposable
-    @Inject
     lateinit var googleCalendarRepository: Repository
-    @Inject
-    lateinit var calendarDataService: DataService
-
+    private lateinit var compositeDisposable: CompositeDisposable
+    private lateinit var calendarDataService: DataService
     private val REQUEST_ACCOUNT: String = "accountName"
     private var calendarId: String = "skaehdwn1014@gmail.com"
 
