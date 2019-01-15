@@ -1,4 +1,4 @@
-package com.example.onemask.myapplication.application.di
+package com.example.st.google_calendar.application.di
 
 import android.app.Application
 import com.example.st.google_calendar.application.BaseApplication
@@ -21,7 +21,7 @@ interface AppComponent : AndroidInjector<BaseApplication>{
     @Component.Builder
     interface Builder{
         @BindsInstance
-        fun application(application : Application) : AppComponent.Builder
+        fun application(application : Application) : Builder
         fun bind() : AppComponent
     }
 
