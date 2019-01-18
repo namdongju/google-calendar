@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -5,20 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-<<<<<<< HEAD
-    <Button
-        android:id="@+id/button_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="56dp"
-        android:text="캘린더 받아오기"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-=======
-
 
     <TextView
         android:id="@+id/text_field"
@@ -30,30 +17,20 @@
         android:text="init"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_oath"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="56dp"
-        android:text="구글 인증"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/button_auth"
+        android:layout_width="124dp"
+        android:layout_height="47dp"
+        android:text="본인 인증"
+        app:layout_constraintBottom_toTopOf="@+id/text_field"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"/>
-
-    <TextView
-        android:id="@+id/text_field"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="39dp"
-        android:text="text"
-        app:layout_constraintBottom_toTopOf="@+id/button_calendar"
-
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_calendar"
@@ -74,7 +51,9 @@
         android:layout_marginBottom="40dp"
         android:text="개인 일정"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/text_field"/>
-
+        app:layout_constraintBottom_toTopOf="@+id/text_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_calendar" />
 
 </android.support.constraint.ConstraintLayout>

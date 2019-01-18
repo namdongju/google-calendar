@@ -1,9 +1,14 @@
+package com.example.st.google_calendar
 
-import android.support.v7.app.AppCompatActivity
+import android.Manifest
+import android.accounts.AccountManager
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import com.example.st.google_calendar.R.id.button_auth
 import com.example.st.google_calendar.remote.DataService
 import com.example.st.google_calendar.remote.Repository
 import com.google.api.client.extensions.android.http.AndroidHttp
@@ -39,8 +44,6 @@ class MainActivity : DaggerAppCompatActivity() {
     private lateinit var calendarDataService: DataService
     private val REQUEST_ACCOUNT: String = "accountName"
     private var calendarId: String = "skaehdwn1014@gmail.com"
-    private var test: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +54,6 @@ class MainActivity : DaggerAppCompatActivity() {
         ).setBackOff(ExponentialBackOff())
         initCalendarDataService()
         googleCalendarRepository = Repository(calendarDataService)
-
         button_auth.setOnClickListener {
             getEventList(calendarId)
         }
@@ -59,9 +61,7 @@ class MainActivity : DaggerAppCompatActivity() {
             getEventList(calendarId)
         }
         button_calendar.setOnClickListener {
->>>>>>> 22efdc3b0d465f16a0818a7a9f0cfe7ed7542b0d
         }
-
     }
 
     fun initCalendarDataService() {
@@ -71,26 +71,6 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun CalendarList() {
-<<<<<<< HEAD
-            googleCalendarRepository.getCalendarList()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .map { it.items }
-                    .subscribe({
-                        it.forEach { item ->
-                            val button = Button(this)
-                            text_field.text = item.summary
-                            button_calendar.setOnClickListener{
-                                getEventList(item.id)
-                            }
-                        }
-                    }, {
-                        when (it) {
-                            is UserRecoverableAuthIOException -> startActivityForResult(it.intent, RC_AUTH_PERMISSION)
-                            else -> it.printStackTrace()
-                        }
-                    }).apply { compositeDisposable.add(this) }
-
-=======
         googleCalendarRepository.getCalendarList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { it.items }
@@ -104,7 +84,6 @@ class MainActivity : DaggerAppCompatActivity() {
                     }
                 }, { it.printStackTrace() })
                 .apply { compositeDisposable.add(this) }
->>>>>>> 22efdc3b0d465f16a0818a7a9f0cfe7ed7542b0d
     }
 
     private fun getEventList(calendarId: String) {
@@ -122,10 +101,6 @@ class MainActivity : DaggerAppCompatActivity() {
         }
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 22efdc3b0d465f16a0818a7a9f0cfe7ed7542b0d
     private fun isGooglePlayServiceAvailable(): Boolean {
         googleAccountCredential.selectedAccountName?.let {
             button_auth.visibility = View.INVISIBLE
