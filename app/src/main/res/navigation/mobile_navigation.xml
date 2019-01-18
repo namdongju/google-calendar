@@ -13,17 +13,14 @@
 			android:id="@+id/action_dest_auth_to_dest_calendar_select"
 			app:destination="@id/dest_calendar_list" />
 	</fragment>
-
 	<fragment
 		android:id="@+id/dest_calendar_list"
 		android:name="com.example.st.google_calendar.controller.calendarview.CalendarSelectFragment"
 		tools:layout="@layout/fragment_calendar_list">
-
 		<action
 			android:id="@+id/action_calendar_list_to_event_list"
 			app:destination="@id/dest_event_list" />
 	</fragment>
-
 	<fragment
 		android:id="@+id/dest_event_list"
 		android:name="com.example.st.google_calendar.controller.calendarview.CalendarFragment"
@@ -32,7 +29,5 @@
 			android:name="calendarId"
 			app:argType="string"
 			android:defaultValue="@string/calendarId_default"/>
-
 	</fragment>
-
 </navigation>
