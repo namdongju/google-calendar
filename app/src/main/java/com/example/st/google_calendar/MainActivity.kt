@@ -25,6 +25,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.EasyPermissions.hasPermissions
 import java.util.*
+import java.util.function.ToDoubleBiFunction
 import javax.inject.Inject
 
 private const val RP_GET_ACCOUNTS = 1001
@@ -39,9 +40,12 @@ class MainActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var googleAccountCredential: GoogleAccountCredential
     @Inject
+    lateinit var compositeDisposable: CompositeDisposable
+    @Inject
     lateinit var googleCalendarRepository: Repository
-    private lateinit var compositeDisposable: CompositeDisposable
-    private lateinit var calendarDataService: DataService
+    @Inject
+    lateinit var calendarDataService: DataService
+
     private val REQUEST_ACCOUNT: String = "accountName"
     private var calendarId: String = "skaehdwn1014@gmail.com"
 
@@ -62,6 +66,8 @@ class MainActivity : DaggerAppCompatActivity() {
         }
         button_calendar.setOnClickListener {
         }
+        TODO()
+
     }
 
     fun initCalendarDataService() {
