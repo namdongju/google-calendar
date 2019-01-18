@@ -1,4 +1,4 @@
-package com.example.st.google_calendar
+package com.example.st.google_calendar.remote
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.http.HttpTransport
@@ -9,15 +9,16 @@ import com.google.api.services.calendar.model.CalendarList
 import com.google.api.services.calendar.model.Event
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
-class CalendarDataService constructor(
-        httptransport : HttpTransport,
+class DataService @Inject constructor(
+        httptransport: HttpTransport,
         jacksonFactory: JacksonFactory,
-        googleAccountCredential : GoogleAccountCredential
-) : CalendarService {
+        googleAccountCredential: GoogleAccountCredential
+) : Service {
     private val calendar: Calendar = Calendar.Builder(httptransport, jacksonFactory, googleAccountCredential)
-            .setApplicationName("Google Calendar ").build()
+            .setApplicationName("Google Calendar API ,MVC").build()
 
     override fun getCalendarList(): Single<CalendarList> {
         return Single.fromCallable { calendar.CalendarList().list().execute() }
@@ -25,7 +26,6 @@ class CalendarDataService constructor(
     }
 
     override fun getEventList(calendarId: String): Single<List<Event>> {
-
         var now = DateTime(System.currentTimeMillis())
         return Single.fromCallable {
             calendar.events()
@@ -33,10 +33,9 @@ class CalendarDataService constructor(
                     .setOrderBy("startTime")
                     .setTimeMin(now)
                     .setSingleEvents(true)
-                    .execute() }
+                    .execute()
+        }
                 .subscribeOn(Schedulers.io())
                 .map { it.items }
     }
 }
-
-
