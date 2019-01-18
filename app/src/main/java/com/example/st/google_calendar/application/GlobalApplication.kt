@@ -1,12 +1,11 @@
 package com.example.st.google_calendar.application
 
-import com.example.st.google_calendar.application.di.DaggerApplicationComponent
+import com.example.st.google_calendar.application.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
+class GlobalApplication: DaggerApplication() {
 
-abstract class BaseApplication : DaggerApplication(){
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
-        DaggerApplicationComponent.builder().application(this).bind()
-
+            DaggerAppComponent.builder().application(this).build()
 }

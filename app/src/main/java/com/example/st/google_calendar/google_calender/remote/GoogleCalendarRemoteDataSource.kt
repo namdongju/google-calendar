@@ -1,9 +1,10 @@
-package com.example.st.google_calendar.remote
+package com.example.st.google_calendar.google_calender.remote
 
+import com.example.st.google_calendar.google_calender.GoogleCalendarDataSource
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.http.HttpTransport
+import com.google.api.client.json.JsonFactory
 import com.google.api.client.json.jackson2.JacksonFactory
-import com.google.api.client.util.DateTime
 import com.google.api.services.calendar.Calendar
 import com.google.api.services.calendar.model.CalendarList
 import com.google.api.services.calendar.model.Event
@@ -11,31 +12,28 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-
-class DataService @Inject constructor(
-        httptransport: HttpTransport,
+class GoogleCalendarRemoteDataSource @Inject constructor(
+        httptransport : HttpTransport,
         jacksonFactory: JacksonFactory,
-        googleAccountCredential: GoogleAccountCredential
-) : Service {
+        googleAccountCredential : GoogleAccountCredential
+) : GoogleCalendarDataSource {
     private val calendar: Calendar = Calendar.Builder(httptransport, jacksonFactory, googleAccountCredential)
-            .setApplicationName("Google Calendar API ,MVC").build()
+        .setApplicationName("Google Calendar Api MVC")
+        .build()
 
     override fun getCalendarList(): Single<CalendarList> {
         return Single.fromCallable { calendar.CalendarList().list().execute() }
-                .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
     }
 
-    override fun getEventList(calendarId: String): Single<List<Event>> {
-        var now = DateTime(System.currentTimeMillis())
+    override fun getEvents(calendarId: String): Single<List<Event>> {
         return Single.fromCallable {
             calendar.events()
-                    .list(calendarId)
-                    .setOrderBy("startTime")
-                    .setTimeMin(now)
-                    .setSingleEvents(true)
-                    .execute()
-        }
-                .subscribeOn(Schedulers.io())
-                .map { it.items }
+                .list(calendarId)
+                .setOrderBy("startTime")
+                .setSingleEvents(true)
+                .execute() }
+            .subscribeOn(Schedulers.io())
+            .map { it.items }
     }
 }

@@ -1,60 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	tools:context=".controller.main.MainActivity"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
+	<android.support.v7.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:background="@color/colorPrimary"
+		android:theme="@style/ThemeOverlay.AppCompat.Dark"
+		android:layout_height="wrap_content"/>
 
-
-    <TextView
-        android:id="@+id/text_field"
-        android:layout_width="288dp"
-        android:layout_height="373dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="41dp"
-        android:text="init"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_auth"
-        android:layout_width="124dp"
-        android:layout_height="47dp"
-        android:text="본인 인증"
-        app:layout_constraintBottom_toTopOf="@+id/text_field"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_calendar"
-        android:layout_width="124dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="40dp"
-        android:text="대한민국의 휴일"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/text_field"
-        app:layout_constraintEnd_toStartOf="@+id/button_calendar2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button_calendar2"
-        android:layout_width="124dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="40dp"
-        android:text="개인 일정"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/text_field"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_calendar" />
-
-</android.support.constraint.ConstraintLayout>
+	<fragment
+		android:id="@+id/host_fragment"
+		android:name="androidx.navigation.fragment.NavHostFragment"
+		android:layout_weight="1"
+		app:defaultNavHost="true"
+		app:navGraph="@navigation/mobile_navigation"
+		android:layout_width="match_parent" android:layout_height="0dp"/>
+</LinearLayout>

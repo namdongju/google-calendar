@@ -1,27 +1,28 @@
 package com.example.st.google_calendar.application.di
 
-import android.app.Application
-import com.example.st.google_calendar.application.BaseApplication
-import com.example.st.google_calendar.remote.GoogleCalendarDataModule
-import dagger.BindsInstance
 import dagger.Component
-import dagger.android.support.AndroidSupportInjectionModule
-import dagger.android.AndroidInjector
+import dagger.BindsInstance
 import javax.inject.Singleton
+import android.app.Application
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
+import com.example.st.google_calendar.application.GlobalApplication
+import com.example.st.google_calendar.google_calender.GoogleCalendarDataModule
 
 @Singleton
 @Component(
-        modules = [AndroidSupportInjectionModule::class,
-            ApplicationModule::class,
-            ActivityBindModule::class,
-            GoogleCalendarDataModule::class
-        ]
+    modules = [AndroidSupportInjectionModule::class,
+        ApplicationModule::class,
+        ActivityBindingModule::class,
+        GoogleCalendarDataModule::class
+    ]
 )
-interface ApplicationComponent : AndroidInjector<BaseApplication>{
+
+interface AppComponent : AndroidInjector<GlobalApplication> {
     @Component.Builder
-    interface Builder{
+    interface Builder {
         @BindsInstance
-        fun application(application : Application) : Builder
-        fun bind() : ApplicationComponent
+        fun application(application: Application): Builder
+        fun build(): AppComponent
     }
 }

@@ -1,6 +1,7 @@
-package com.example.onemask.myapplication.scopes
+package com.example.st.google_calendar.application.scopes
 
 import javax.inject.Scope
+
 
 @Scope
 @Retention(AnnotationRetention.RUNTIME)

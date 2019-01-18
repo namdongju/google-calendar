@@ -1,9 +1,11 @@
-package com.example.st.google_calendar.remote
+package com.example.st.google_calendar.google_calender
 
 import android.content.Context
+import com.example.st.google_calendar.google_calender.remote.GoogleCalendarRemoteDataSource
 import com.google.api.client.extensions.android.http.AndroidHttp
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.http.HttpTransport
+import com.google.api.client.json.JsonFactory
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.client.util.ExponentialBackOff
 import com.google.api.services.calendar.CalendarScopes
@@ -21,15 +23,15 @@ abstract class GoogleCalendarDataModule {
         @JvmStatic
         @Singleton
         @Provides
-        fun provideGoogleAccountCredential(context : Context) : GoogleAccountCredential {
+        fun provideGoogleAccountCredential(context: Context): GoogleAccountCredential {
             return GoogleAccountCredential
-                    .usingOAuth2(context, Arrays.asList(CalendarScopes.CALENDAR)
-                    ).setBackOff(ExponentialBackOff())
+                    .usingOAuth2(context, Arrays.asList(CalendarScopes.CALENDAR))
+                    .setBackOff(ExponentialBackOff())
         }
         @JvmStatic
         @Singleton
         @Provides
-        fun provideHttpTransport() : HttpTransport {
+        fun provideHttpTransport() : HttpTransport{
             return AndroidHttp.newCompatibleTransport()
         }
         @JvmStatic
@@ -38,18 +40,19 @@ abstract class GoogleCalendarDataModule {
         fun provideJacksonfactory() : JacksonFactory {
             return JacksonFactory.getDefaultInstance()
         }
+
         @JvmStatic
         @Singleton
         @Provides
-        fun provideCalendarDataService(httpTransport: HttpTransport, jacksonfactory: JacksonFactory, googleAccountCredential: GoogleAccountCredential) : DataService {
-            return DataService(
+        fun provideGoogleCalendarRemoteDataSource(httpTransport: HttpTransport, jacksonfactory: JacksonFactory, googleAccountCredential: GoogleAccountCredential): GoogleCalendarRemoteDataSource {
+            return GoogleCalendarRemoteDataSource(
                     httpTransport,
                     jacksonfactory,
-                    googleAccountCredential
-            )
+                    googleAccountCredential)
         }
     }
+
     @Singleton
     @Binds
-    abstract fun providesGoogleRepository(CalendarRepository : Repository) : Service
+    abstract fun provideGoogleCalendarRepository(googleCalendarRepository: GoogleCalendarRepository): GoogleCalendarDataSource
 }
