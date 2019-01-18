@@ -7,6 +7,7 @@ import dagger.android.support.DaggerApplication
 
 abstract class BaseApplication : DaggerApplication(){
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
-        DaggerApplicationComponent.builder().application(this).bind()
+            TODO()
+        //DaggerApplicationComponent.builder().application(this).bind()
 
 }
