@@ -1,18 +1,9 @@
-package com.example.st.google_calendar
 
-import android.Manifest
-import android.accounts.AccountManager
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-<<<<<<< HEAD
 import android.support.v7.app.AppCompatActivity
-=======
 import android.view.View
->>>>>>> 22efdc3b0d465f16a0818a7a9f0cfe7ed7542b0d
 import android.widget.Button
 import android.widget.Toast
+import com.example.st.google_calendar.R.id.button_auth
 import com.example.st.google_calendar.remote.DataService
 import com.example.st.google_calendar.remote.Repository
 import com.google.api.client.extensions.android.http.AndroidHttp
@@ -59,19 +50,8 @@ class MainActivity : DaggerAppCompatActivity() {
                 applicationContext, Arrays.asList(CalendarScopes.CALENDAR)
         ).setBackOff(ExponentialBackOff())
         initCalendarDataService()
-<<<<<<< HEAD
-        googleCalendarRepository = CalendarRepository(calendarDataService)
-
-
-        button_oath.setOnClickListener{
-            isGooglePlayServiceAvailable()
-        }
-
-        button_calendar.setOnClickListener{
-            if(test)
-             CalendarList()
-=======
         googleCalendarRepository = Repository(calendarDataService)
+
         button_auth.setOnClickListener {
             getEventList(calendarId)
         }
