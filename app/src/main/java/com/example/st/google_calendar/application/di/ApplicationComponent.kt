@@ -18,11 +18,11 @@ import com.example.st.google_calendar.google_calender.GoogleCalendarDataModule
     ]
 )
 
-interface AppComponent : AndroidInjector<GlobalApplication> {
+interface ApplicationComponent : AndroidInjector<GlobalApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
         fun application(application: Application): Builder
-        fun build(): AppComponent
+        fun build(): ApplicationComponent
     }
 }
