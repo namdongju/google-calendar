@@ -49,30 +49,30 @@ class AuthFragment : DaggerFragment() {
                 accountName?.let {
                     googleAccountCredential.selectedAccountName = it
                     moveToCalendarSelectFragment()
-                }?: run {
+                } ?: run {
                     Toast.makeText(requireContext(), "선택된 계정이 없습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-@AfterPermissionGranted(RP_GET_ACCOUNTS)
-private fun selectAccount() {
-    if (EasyPermissions.hasPermissions(requireContext(), Manifest.permission.GET_ACCOUNTS)) {
-        startActivityForResult(googleAccountCredential.newChooseAccountIntent(), RC_ACCOUNT_PICKER)
-    }else{
-        EasyPermissions.requestPermissions(
-                this,
-                "구글 계정 권한이 필요합니다.",
-                RP_GET_ACCOUNTS,
-                android.Manifest.permission.GET_ACCOUNTS
-        )
+    @AfterPermissionGranted(RP_GET_ACCOUNTS)
+    private fun selectAccount() {
+        if (EasyPermissions.hasPermissions(requireContext(), Manifest.permission.GET_ACCOUNTS)) {
+            startActivityForResult(googleAccountCredential.newChooseAccountIntent(), RC_ACCOUNT_PICKER)
+        } else {
+            EasyPermissions.requestPermissions(
+                    this,
+                    "구글 계정 권한이 필요합니다.",
+                    RP_GET_ACCOUNTS,
+                    android.Manifest.permission.GET_ACCOUNTS
+            )
+        }
     }
-}
 
-private fun moveToCalendarSelectFragment() {
-    AuthFragmentDirections.actionDestAuthToDestCalendarSelect().apply {
-        findNavController().navigate(this)
+    private fun moveToCalendarSelectFragment() {
+        AuthFragmentDirections.actionDestAuthToDestCalendarSelect().apply {
+            findNavController().navigate(this)
         }
     }
 }
