@@ -34,6 +34,7 @@ class CalendarSelectFragment : DaggerFragment() {
         compositeDisposable = CompositeDisposable()
     }
 
+    //layout을 view 객체로 만들기 위해 하는 작업
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
