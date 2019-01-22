@@ -14,7 +14,7 @@ android {
         applicationId "com.example.st.google_calendar"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 1
+        versionCode 73
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
