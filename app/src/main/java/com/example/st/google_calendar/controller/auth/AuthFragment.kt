@@ -70,7 +70,7 @@ class AuthFragment : DaggerFragment() {
         }
     }
 
-    private fun moveToCalendarSelectFragment() {
+    private fun moveToCalendarSelectFragment(){
         AuthFragmentDirections.actionDestAuthToDestCalendarSelect().apply {
             findNavController().navigate(this)
         }
