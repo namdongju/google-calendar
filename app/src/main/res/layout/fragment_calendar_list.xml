@@ -8,8 +8,8 @@
 
 	<LinearLayout
 		android:id="@+id/layout_calendars"
-		android:layout_width="301dp"
-		android:layout_height="208dp"
+		android:layout_width="281dp"
+		android:layout_height="224dp"
 		android:layout_gravity="center_horizontal"
 		android:gravity="center_horizontal"
 		android:orientation="vertical"
