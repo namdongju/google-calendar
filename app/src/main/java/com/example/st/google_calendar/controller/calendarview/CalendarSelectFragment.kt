@@ -1,6 +1,5 @@
 package com.example.st.google_calendar.controller.calendarview
 
-
 import javax.inject.Inject
 import android.os.Bundle
 import android.app.Activity
@@ -70,7 +69,7 @@ class CalendarSelectFragment : DaggerFragment() {
             layout_calendars.addView(createButton(it))
         }
     }
-    
+
     private fun createButton(calendar: CalendarListEntry): Button {
         val button = Button(requireContext())
         button.text = calendar.summary
