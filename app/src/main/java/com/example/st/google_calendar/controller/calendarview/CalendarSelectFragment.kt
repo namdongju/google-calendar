@@ -71,6 +71,7 @@ class CalendarSelectFragment : DaggerFragment() {
         }
     }
 
+
     private fun createButton(calendar: CalendarListEntry): Button {
         val button = Button(requireContext())
         button.text = calendar.summary
